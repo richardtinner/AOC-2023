@@ -43,7 +43,7 @@ with open("input15.txt") as my_file:
     sum = 0
     for box_index, box in enumerate(boxes, 1):
         for lens_index, lens in enumerate(box, 1):
-           val = box_index * lens_index * int(box[lens])
-           sum += val
+            val = box_index * lens_index * int(box[lens])
+            sum += val
 
     print("Part2 = ", sum)

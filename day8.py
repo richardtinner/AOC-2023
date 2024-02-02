@@ -1,5 +1,7 @@
 import re
 import math
+import networkx as nx
+import matplotlib.pyplot as plt
 
 directions = []
 current_positions = []
@@ -42,11 +44,15 @@ def is_prime(num):
 
 
 with open("input8.txt") as my_file:
+    G = nx.Graph()
     directions = my_file.readline().strip()
     my_file.readline()
     for line in my_file:
         parse = re.findall('[A-Z]+', line)
         network[parse[0]] = {'L': parse[1], 'R': parse[2]}
+        G.add_node(parse[0])
+        G.add_edge(parse[0], parse[1])
+        G.add_edge(parse[0], parse[2])
 
     current_pos = 'AAA'
     steps = 0
@@ -84,6 +90,13 @@ with open("input8.txt") as my_file:
     print("Part 2 =", math.lcm(*min_steps))
     for ms in min_steps:
         print (ms, is_prime(ms))
+
+    S = [G.subgraph(c).copy() for c in nx.connected_components(G)]
+
+
+    nx.draw(S[0], pos=nx.circular_layout(S[0]), with_labels=True, font_weight='bold')
+
+    plt.show()
 
 
 
