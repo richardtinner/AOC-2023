@@ -20,7 +20,6 @@ with open("input25.txt") as my_file:
     G.remove_edges_from(edges_to_remove)
     c1, c2 = nx.connected_components(G)
 
-    # print answer and draw graph
     print(len(c1), len(c2), len(c1) * len(c2))
     nx.draw(G, with_labels=True, font_weight='bold')
     plt.show()
